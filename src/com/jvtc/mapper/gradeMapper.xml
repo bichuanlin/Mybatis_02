@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="com.jvtc.mapper.GradeMapper">
+		<insert id="addGrade" parameterType="grade" keyProperty="id" useGeneratedKeys="true">
+		    insert into grade(gradeName,gradeNum) values(#{name},#{num})
+		</insert>
+		<!-- map输入参数 -->
+		<insert id="addGradeMap" parameterType="map" keyProperty="id" useGeneratedKeys="true">
+             insert into grade(gradeName,gradeNum) values('${name}',${num})	
+ 		
+		</insert>
+	</mapper>

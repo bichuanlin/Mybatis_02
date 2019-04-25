@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="com.jvtc.mapper.StudentMapper">
+		<select id="queryStudentById" parameterType="string" resultType="Student">
+			select * from student where id = ${value}
+		</select>
+		<insert id="addStudent" parameterType="student">
+		   insert into student(id,name,age,sex) values (#{id},#{name},#{age},#{sex})		
+		</insert>
+		<update id="updateStudent" parameterType="student">
+		    update student set name=#{name},age=#{age},sex=#{sex} where id=#{id}
+		</update>
+		<!-- 查询所有学生信息 -->
+		<select id="queryAllStudent" resultType="student">
+		   select * from student
+		</select>
+		<!-- 统计一下女生的总数 -->
+		<select id="queryCountBySex" resultType="_int" parameterType="String">
+		   select count(*) from student where sex=${value}
+		</select>
+		<!-- 删除学生信息 -->
+		<delete id="deleteStudentById" parameterType="String">
+		   delete from student where id=#{id}		
+		</delete>
+		<!-- 查询所有学生信息，按指定的列进行排序 -->
+		<select id="selectAllStudentOrderByColumn" parameterType="String" resultType="student">
+		   select * from student order by ${value} desc
+		</select>
+		<!-- 根据姓名查询学生信息（要求模糊查询 -->
+		<select id="queryStudentByName" parameterType="string" resultType="student">
+		   <!-- select * from student where name like #{name} -->
+		   select *from student where name like '%${value}%'<!-- 原样拼接 -->		
+		</select>
+	</mapper>
